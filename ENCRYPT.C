@@ -1,12 +1,12 @@
 ENCRYPT.C
 #define _CRT_SECURE_NO_WARNINGS
 
-// === PH?N TH�M M?I: HEADER CHO SECURE RANDOM ===
+
 #ifdef _WIN32
 #include <windows.h>
 #include <bcrypt.h>
 #define NT_SUCCESS(Status) (((NTSTATUS)(Status)) >= 0)
-#pragma comment(lib, "bcrypt.lib") // T? ??ng link th? vi?n tr�n Visual Studio
+#pragma comment(lib, "bcrypt.lib") 
 #else
 #include <fcntl.h>  
 #include <unistd.h> 
@@ -29,9 +29,8 @@ int main() {
     char plaintext[1024];
     uint8_t ciphertext[1024];
 
-    // T�n file ??u ra
-    const char* msg_file = "message.bin"; // File ch?a tin nh?n m� h�a (?? gi?i m�)
-    const char* nist_file = "data.txt";   // File ch?a 1 tri?u bit keystream
+    const char* msg_file = "message.bin"; 
+    const char* nist_file = "data.txt";   
 
     printf("=== MA HOA SALSA20 (SECURE MODE) ===\n");
 
