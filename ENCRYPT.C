@@ -1,12 +1,12 @@
 ENCRYPT.C
 #define _CRT_SECURE_NO_WARNINGS
 
-// === PH?N THÊM M?I: HEADER CHO SECURE RANDOM ===
+// === PH?N THï¿½M M?I: HEADER CHO SECURE RANDOM ===
 #ifdef _WIN32
 #include <windows.h>
 #include <bcrypt.h>
 #define NT_SUCCESS(Status) (((NTSTATUS)(Status)) >= 0)
-#pragma comment(lib, "bcrypt.lib") // T? ??ng link th? vi?n trên Visual Studio
+#pragma comment(lib, "bcrypt.lib") // T? ??ng link th? vi?n trï¿½n Visual Studio
 #else
 #include <fcntl.h>  
 #include <unistd.h> 
@@ -29,8 +29,8 @@ int main() {
     char plaintext[1024];
     uint8_t ciphertext[1024];
 
-    // Tên file ??u ra
-    const char* msg_file = "message.bin"; // File ch?a tin nh?n mã hóa (?? gi?i mã)
+    // Tï¿½n file ??u ra
+    const char* msg_file = "message.bin"; // File ch?a tin nh?n mï¿½ hï¿½a (?? gi?i mï¿½)
     const char* nist_file = "data.txt";   // File ch?a 1 tri?u bit keystream
 
     printf("=== MA HOA SALSA20 (SECURE MODE) ===\n");
@@ -39,7 +39,7 @@ int main() {
     printf("Nhap plaintext can ma hoa: ");
     if (fgets(plaintext, sizeof(plaintext), stdin) == NULL) return 0;
 
-    // X? lý xóa xu?ng dòng
+    // X? lï¿½ xï¿½a xu?ng dï¿½ng
     size_t len = strlen(plaintext);
     if (len > 0 && plaintext[len - 1] == '\n') plaintext[--len] = '\0';
 
