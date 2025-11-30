@@ -1,17 +1,17 @@
 ENCRYPT.C
 #define _CRT_SECURE_NO_WARNINGS
 
-// === PH?N TH�M M?I: HEADER CHO SECURE RANDOM ===
+
 #ifdef _WIN32
 #include <windows.h>
 #include <bcrypt.h>
 #define NT_SUCCESS(Status) (((NTSTATUS)(Status)) >= 0)
-#pragma comment(lib, "bcrypt.lib") // T? ??ng link th? vi?n tr�n Visual Studio
+#pragma comment(lib, "bcrypt.lib") 
 #else
 #include <fcntl.h>  
 #include <unistd.h> 
 #endif
-// ===============================================
+
 
 #include <stdio.h>
 #include <string.h>
@@ -29,19 +29,55 @@ int main() {
     char plaintext[1024];
     uint8_t ciphertext[1024];
 
-    // T�n file ??u ra
-    const char* msg_file = "message.bin"; // File ch?a tin nh?n m� h�a (?? gi?i m�)
-    const char* nist_file = "data.txt";   // File ch?a 1 tri?u bit keystream
+
+    const char* msg_file = "message.bin"; 
+    const char* nist_file = "data.txt";   
 
     printf("=== MA HOA SALSA20 (SECURE MODE) ===\n");
 
-    // Nh?p plaintext
+   
     printf("Nhap plaintext can ma hoa: ");
     if (fgets(plaintext, sizeof(plaintext), stdin) == NULL) return 0;
 
-    // X? l� x�a xu?ng d�ng
+
     size_t len = strlen(plaintext);
     if (len > 0 && plaintext[len - 1] == '\n') plaintext[--len] = '\0';
 
+  
+    printf("\n[1] Dang sinh khoa ngau nhien an toan...\n");
 
+#ifdef _WIN32
+   
+    NTSTATUS status;
+    status = BCryptGenRandom(NULL, key, 32, BCRYPT_USE_SYSTEM_PREFERRED_RNG);
+    if (!NT_SUCCESS(status)) {
+        printf("LOI: Khong the tao Key ngau nhien (Windows BCrypt)!\n");
+        return 1;
+    }
+    status = BCryptGenRandom(NULL, nonce, 8, BCRYPT_USE_SYSTEM_PREFERRED_RNG);
+    if (!NT_SUCCESS(status)) {
+        printf("LOI: Khong the tao Nonce ngau nhien (Windows BCrypt)!\n");
+        return 1;
+    }
+#else
+    
+    int fd = open("/dev/urandom", O_RDONLY);
+    if (fd == -1) {
+        perror("LOI: Khong the mo /dev/urandom");
+        return 1;
+    }
+    if (read(fd, key, 32) != 32) {
+        printf("LOI: Khong doc du 32 byte cho Key.\n");
+        close(fd); return 1;
+    }
+    if (read(fd, nonce, 8) != 8) {
+        printf("LOI: Khong doc du 8 byte cho Nonce.\n");
+        close(fd); return 1;
+          }
+    close(fd);
+#endif
+    
+
+    print_hex("Key:   ", key, 32);
+    print_hex("Nonce: ", nonce, 8);
 
