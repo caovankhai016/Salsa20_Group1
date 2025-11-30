@@ -1,0 +1,35 @@
+# Trình biên dịch
+CC = gcc
+
+# Cờ biên dịch
+CFLAGS = -I. -Wall -g
+
+# File dùng chung (Nằm ở thư mục gốc như đã bàn)
+COMMON_SRC = salsa20.c
+
+# Danh sách file chạy sẽ tạo ra (Nên để chữ thường cho chuẩn Linux/Unix)
+TARGETS = encrypt decrypt test
+
+all: $(TARGETS)
+
+# 1. Tạo chương trình Mã hóa
+# Input: Encrypt/Encrypt.c (viết hoa theo ảnh)
+# Output: encrypt (viết thường cho đồng bộ)
+encrypt: Encrypt/Encrypt.c $(COMMON_SRC)
+	$(CC) $(CFLAGS) Encrypt/Encrypt.c $(COMMON_SRC) -o encrypt
+
+# 2. Tạo chương trình Giải mã
+# Input: Decrypt/Decrypt.c
+# Output: decrypt
+decrypt: Decrypt/Decrypt.c $(COMMON_SRC)
+	$(CC) $(CFLAGS) Decrypt/Decrypt.c $(COMMON_SRC) -o decrypt
+
+# 3. Tạo chương trình Test
+# Input: Test/Test.c
+# Output: test
+test: Test/Test.c $(COMMON_SRC)
+	$(CC) $(CFLAGS) Test/Test.c $(COMMON_SRC) -o test
+
+# Dọn dẹp (Sẽ xóa đúng các file vừa tạo)
+clean:
+	rm -f $(TARGETS) *.exe message.bin data.txt keystream_1M_bits.txt

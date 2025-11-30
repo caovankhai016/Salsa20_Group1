@@ -1,0 +1,31 @@
+# --- Visual Studio generated files (Rác của VS) ---
+.vs/
+x64/
+x86/
+Debug/
+Release/
+*.user
+*.suo
+*.opensdf
+*.sdf
+*.cache
+*.pdb
+*.obj
+*.idb
+*.ilk
+*.pch
+*.ipch
+
+# --- File chạy (Executable) ---
+*.exe
+*.dll
+
+# --- File dữ liệu sinh ra khi chạy code (Không up lên Git) ---
+message.bin
+data.txt
+keystream_1M_bits.txt
+
+# --- Các file tạm khác ---
+*.log
+*.tlog
+*.tmp
