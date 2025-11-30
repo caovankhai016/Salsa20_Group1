@@ -1,0 +1,16 @@
+{
+  "name": "C/C++ Salsa20",
+  "image": "mcr.microsoft.com/devcontainers/cpp:latest",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.cpptools",
+        "ms-vscode.cpptools-extension-pack"
+      ]
+    }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {}
+  },
+  "postCreateCommand": "gcc --version && make --version"
+}
