@@ -1,0 +1,7 @@
+Cách chạy code 
+B1: Tải thư mục Salsa20_demo.zip trên github về máy tính 
+B2: giải nén Salsa20_demo.zip và mở trong cửa sổ Terminal 
+B3: chạy file thực thi bằng lệnh 
+./Encrypt => để chạy file mã hóa 
+./Decrypt => để chạy file giải mã 
+./Test => để chạy test vector 
