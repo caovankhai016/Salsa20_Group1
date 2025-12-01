@@ -32,6 +32,5 @@ int main() {
     salsa20_crypt(key, 32, nonce, 0, buffer, len);
     buffer[len] = '\0';
     printf("\nNOI DUNG GOC: %s\n\n", buffer);
-
     return 0;
 }
