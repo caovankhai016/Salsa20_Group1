@@ -1,4 +1,3 @@
-ENCRYPT.C
 #define _CRT_SECURE_NO_WARNINGS
 
 #ifdef _WIN32
@@ -19,15 +18,14 @@ ENCRYPT.C
 
 #define NIST_BLOCKS 2000
 
-    int main()
-{
+int main() {
     uint8_t key[32];
     uint8_t nonce[8];
     char plaintext[1024];
     uint8_t ciphertext[1024];
 
-    const char *msg_file = "message.bin";
-    const char *nist_file = "data.txt";
+    const char* msg_file = "message.bin";
+    const char* nist_file = "data.txt";
 
     printf("=== MA HOA SALSA20 (SECURE MODE) ===\n");
 
@@ -86,7 +84,7 @@ ENCRYPT.C
 
     salsa20_crypt(key, 32, nonce, 0, ciphertext, len);
 
-    FILE *fp_msg = fopen(msg_file, "wb");
+    FILE* fp_msg = fopen(msg_file, "wb");
     if (fp_msg)
     {
         fwrite(key, 1, 32, fp_msg);
@@ -100,7 +98,7 @@ ENCRYPT.C
         printf("Khong the tao file %s\n", msg_file);
     }
 
-    FILE *fp_nist = fopen(nist_file, "w");
+    FILE* fp_nist = fopen(nist_file, "w");
     if (!fp_nist)
     {
         printf("Khong the tao file %s\n", nist_file);
@@ -128,3 +126,4 @@ ENCRYPT.C
     fclose(fp_nist);
     printf("File '%s' chua %d bit lien tuc (san sang cho NIST STS).\n", nist_file, NIST_BLOCKS * 64 * 8);
     return 0;
+}
